@@ -1,0 +1,26 @@
+============================= CRIAÇÃO NO TERMINAL PUTTY ===========================================
+
+# Instalação do Win10
+
+mkdir /opt/unetlab/addons/qemu/win-10test/   // criação da pasta "win-10test" // Depois do hífen posso colocar o número do windows em questão
+
+cd /opt/unetlab/addons/qemu/win-10test/      // Abrir a pasta criada
+
+mv Windows7SP1Ultimate_64_Bit.iso cdrom.iso  // Criação da iso para o EVE // Devo colocar após o mv o nome correspondente da iso que subi para o winSCP
+
+/opt/qemu/bin/qemu-img create -f qcow2 virtioa.qcow2 30G  // Onde está 30G coloco a quantidade de memória que for necessária
+
+
+cd /opt/unetlab/addons/qemu/win-10test/       // Remover a imagem criada do win10
+ rm -f cdrom.iso
+ 
+ 
+ ======================== INSTALAÇÃO DO WIN10 NO VPCS(COMPUTADOR NA EVE) =========================
+ 
+ # Ligar o computador no EVE
+ # Iniciar a instalação normalmente
+ 
+ # Caso haja erro quanto a alocação, clicar em ESCOLHER/PROCURAR DISCO --> Procurar Repositório --> Unidade (B:) --> STORANGE --> 64bits (de acordo com a arquitetura)
+
+
+ 
