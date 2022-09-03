@@ -1,0 +1,16 @@
+====================== Instalação via Putty =========================================
+https://www.redesbrasil.com/aprenda-a-instalar-e-usar-o-eve-ng-para-emular-roteadores-da-mikrotikp/
+
+
+
+mkdir -p /opt/unetlab/addons/qemu/mikrotik-6.40.3                             // Criação de pasta // Posso definir o nome com a versão vmdk do mikrotik
+
+cd /opt/unetlab/addons/qemu/mikrotik-6.40.3                                   // Abrir a pasta criada
+
+wget https://download2.mikrotik.com/routeros/6.40.3/chr-6.40.3.vmdk // Instalar a imagem // Posso copiar o link no site da mikrotik, de acordo com a versão vmdk que queira
+
+/opt/qemu/bin/qemu-img convert -f vmdk -O qcow2 chr-6.40.3.vmdk hda.qcow2  // Criação da imagem // Devo alterar o nome de acordo com a versão da mikrotik
+
+/opt/unetlab/wrappers/unl_wrapper -a fixpermissions         // Executa a permissão de execução do arquivo
+
+rm -rf chr-6.40.3.vmdk                                      // Remove o arquivo após a instalação
