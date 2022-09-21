@@ -1,0 +1,45 @@
+# INSTALAÇÃO
+sudo apt-get install squid
+
+#CRIAÇÃO DE BACKUP
+sudo cp /etc/squid/squid.conf /etc/squid/squid.conf.bkp
+
+#CONFIGURANDO O ARQUIVO DE CONFIGURAÇÃO
+sudo gedit /etc/squid/squid.conf
+
+#ACRESCENTANDO UMA INSTRUÇÃO PARA CONFIGURAÇÃO 
+acl rede_interna src 192.168.0.0/24 // setar o IP do servidor que distribuirá a rede
+http_access allow rede_interna // Definir o acesso a partir do serviço http
+
+acl sites_proibidos _url_regex -i "/etc/squid/sites_proibidos" // criação do arquivos sites proibidos
+http_access deny sites_proibidos
+
+acl downloads_proibidos url_regex -i \.exe\.torrent\.avi\.mp3 // bloqueia downloads
+http_access deny downloads_proibidos
+
+acl almoco time MTWHF 12:00-13:55 // define o horário para utilização da rede
+http_access allow almoco // o nome almoco pode ser substituído
+
+http_access deny all // bloqueia todos os sites pesquisados no servidor
+
+http_port 3128 // para configuração no navegador
+cache_dir ufs /var/spool/squid 1024 16 256
+cache_mem 256 MB
+access_log daemon:/var/log/squid/access.log squid
+cache_log /var/log/squid/cache.log
+
+#EXEMPLO DE ACL
+acl sp _url_regex -i "/etc/squid/sites_proibidos"
+acl all src all
+
+http_access deny sp
+http_access allow all
+
+#CRIANDO O ARQUIVO DOS SITES A SEREM BLOQUEADOS
+sudo gedit /etc/squid/sites_proibidos // O nome pode ser diferente, porém deve ser o mesmo do script acima
+sudo squid -z // Criar diretórios de cache
+sudo /etc/init.d/squid restart // Reiniciar o arquivo de configuração após as alterações
+
+#CONFIGURAÇÃO NO NAVEGADOR
+É necessário configurar o PROXY no navegador, informando a porta e em HTTP o IP do servidor que será o filtro
+
