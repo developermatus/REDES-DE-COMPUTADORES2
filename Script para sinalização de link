@@ -1,0 +1,10 @@
+ACESSAR TOOL --> NETWATCH
+
+============ LINK CAIU ==================
+log error "LINK1 caiu"
+/ip dhcp-cl set add-def=no [find comment="LINK1"]
+
+========== LINK VOLTOU ============
+log error "LINK1 voltou"
+/ip dhcp-cl set add-def=yes [find comment="LINK1"]
+
