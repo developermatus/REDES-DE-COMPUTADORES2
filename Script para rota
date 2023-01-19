@@ -1,3 +1,4 @@
+============== Observar que o ds será diferente para cada rota ============
 {
     :local count [/ip route print count-only where comment="Monitoramento-NET"]
     :if ($bound=1) do={
